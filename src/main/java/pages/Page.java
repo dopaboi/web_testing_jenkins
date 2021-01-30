@@ -10,7 +10,7 @@ public abstract class Page {
 
     public Page(WebDriver driver) {this.driver=driver;}
 
-    protected abstract void open();
+    public abstract void open();
 
     public void open(String url) {driver.get(url);}
 

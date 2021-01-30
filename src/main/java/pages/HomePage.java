@@ -20,26 +20,51 @@ public class HomePage extends Page {
     @FindBy(id = "ok-button")
     private WebElement buttonSubmit;
 
-    @FindBy (name="description")
+    @FindBy(name = "description")
     private WebElement desk;
 
-    @FindBy(id="yui-gen27-button")
+    @FindBy(id = "yui-gen27-button")
     private WebElement buttonSave;
+
+    @FindBy(className = "addTab")
+    private WebElement linkCreateView;
+
+    @FindBy(xpath = "//*[@id=\"name\"]")
+    private WebElement nameView;
+
+    @FindBy(xpath = "//input[@value='hudson.model.ListView']")
+    private WebElement dashboardView;
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
+
 
     public JobPage createJob() {
         linkCreateJob.click();
         type(fieldName, ConfigProperties.getProperties("job.name"));
         freeConfig.click();
         buttonSubmit.click();
-        //type(desk, ConfigProperties.getProperties("job.description"));
         buttonSave.click();
         return PageFactory.initElements(driver, JobPage.class);
     }
 
+    public ViewJobPage createJobToView() throws InterruptedException {
+        linkCreateJob.click();
+        type(fieldName, ConfigProperties.getProperties("job.name"));
+        freeConfig.click();
+        buttonSubmit.click();
+        buttonSave.click();
+        return PageFactory.initElements(driver, ViewJobPage.class);
+    }
+
+    public ViewJobPage createNewView() {
+        linkCreateView.click();
+        type(nameView, ConfigProperties.getProperties("view.name"));
+        dashboardView.click();
+        buttonSubmit.click();
+        return PageFactory.initElements(driver, ViewJobPage.class);
+    }
 
 
     @Override

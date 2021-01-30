@@ -10,7 +10,7 @@ import static org.testng.Assert.*;
 
 public class JobTest extends BasicTest {
 
-    private LoginPage loginPage = PageFactory.initElements(getWebDriver(), LoginPage.class);
+
     private HomePage homePage = PageFactory.initElements(getWebDriver(), HomePage.class);
     private JobPage jobPage = PageFactory.initElements(getWebDriver(), JobPage.class);
 
