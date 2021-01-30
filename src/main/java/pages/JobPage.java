@@ -19,6 +19,16 @@ public class JobPage extends Page {
     @FindBy(css = "#description > div")
     private WebElement jobDescription;
 
+    @FindBy(linkText = "Настройки")
+    private WebElement linkSettings;
+
+    @FindBy(name = "description")
+    private WebElement inputDesc;
+
+    @FindBy(id="yui-gen27-button")
+    private WebElement buttonSave;
+
+
     @FindBy(linkText = "job for testing")
     private WebElement linkJob;
 
@@ -40,6 +50,18 @@ public class JobPage extends Page {
 
     public boolean isJobNotDeleted() {
         return isElementPresent(jobName);
+    }
+
+    public boolean isJobUpdate()
+    {
+        return isElementPresent(jobDescription);
+    }
+
+    public void updateJob()
+    {
+        linkSettings.click();
+        type(inputDesc, ConfigProperties.getProperties("job.description"));
+        buttonSave.click();
 
     }
 

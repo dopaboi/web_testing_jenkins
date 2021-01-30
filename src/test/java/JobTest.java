@@ -1,6 +1,3 @@
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
@@ -8,6 +5,8 @@ import pages.HomePage;
 import pages.JobPage;
 import pages.LoginPage;
 import utils.ConfigProperties;
+
+import static org.testng.Assert.*;
 
 public class JobTest extends BasicTest {
 
@@ -20,6 +19,14 @@ public class JobTest extends BasicTest {
         homePage.open();
         jobPage = homePage.createJob();
         assertEquals(jobPage.getJobName(), ConfigProperties.getProperties("job.finalname"));
+    }
+
+    @Test
+    public void AddDescriptionJob() throws Exception
+    {
+        jobPage.open();
+        jobPage.updateJob();
+        assertTrue(jobPage.isJobUpdate());
     }
 
     @Test
