@@ -30,6 +30,14 @@ public class JobTest extends BasicTest {
     }
 
     @Test
+    public void RenameJobTest() throws Exception
+    {
+        jobPage.open();
+        jobPage.renameJob();
+        assertTrue(jobPage.isJobRename());
+    }
+
+    @Test
     public void DeleteJobTest() throws Exception {
     jobPage.open();
     jobPage.deleteJob();

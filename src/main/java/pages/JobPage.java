@@ -28,6 +28,14 @@ public class JobPage extends Page {
     @FindBy(id="yui-gen27-button")
     private WebElement buttonSave;
 
+    @FindBy(linkText = "Rename")
+    private WebElement linkRename;
+
+    @FindBy(name = "newName")
+    private WebElement newName;
+
+    @FindBy(id="yui-gen3-button")
+    private WebElement buttonRename;
 
     @FindBy(linkText = "job for testing")
     private WebElement linkJob;
@@ -52,9 +60,22 @@ public class JobPage extends Page {
         return isElementPresent(jobName);
     }
 
+    public boolean isJobRename()
+    {
+        return isElementPresent(jobName);
+    }
     public boolean isJobUpdate()
     {
         return isElementPresent(jobDescription);
+    }
+
+    public void renameJob()
+    {
+        linkRename.click();
+        newName.clear();
+        newName.click();
+        type(newName, ConfigProperties.getProperties("job.newname"));
+        buttonRename.click();
     }
 
     public void updateJob()
