@@ -40,6 +40,8 @@ public class HomePage extends Page {
         return PageFactory.initElements(driver, JobPage.class);
     }
 
+
+
     @Override
     public void open() {
         driver.get(ConfigProperties.getProperties("home.url"));

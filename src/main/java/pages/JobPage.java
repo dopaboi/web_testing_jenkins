@@ -37,6 +37,10 @@ public class JobPage extends Page {
     @FindBy(id="yui-gen3-button")
     private WebElement buttonRename;
 
+    @FindBy(linkText = "Собрать сейчас")
+    private WebElement linkCreateBuild;
+
+
     @FindBy(linkText = "job for testing")
     private WebElement linkJob;
 
@@ -69,6 +73,7 @@ public class JobPage extends Page {
         return isElementPresent(jobDescription);
     }
 
+
     public void renameJob()
     {
         linkRename.click();
@@ -76,6 +81,12 @@ public class JobPage extends Page {
         newName.click();
         type(newName, ConfigProperties.getProperties("job.newname"));
         buttonRename.click();
+    }
+
+    public BuildPage createBuild()
+    {
+     linkCreateBuild.click();
+     return PageFactory.initElements(driver, BuildPage.class);
     }
 
     public void updateJob()
