@@ -44,7 +44,7 @@ public class JobPage extends Page {
     @FindBy(linkText = "job for testing")
     private WebElement linkJob;
 
-    @FindBy(linkText = "Удалить Проект")
+    @FindBy(xpath = "//*[@id=\"tasks\"]/div[7]/span/a")
     private WebElement linkDelete;
 
     public JobPage(WebDriver driver) {

@@ -45,12 +45,17 @@ public class ViewJobPage extends Page {
         return isElementPresent(viewDescription);
     }
 
+
+
     public void AddDesk() {
         settingsView.click();
         description.clear();
         type(description, ConfigProperties.getProperties("view.desc"));
         buttonSaveDesk.click();
     }
+
+
+
 
     public void DeleteView()
     {

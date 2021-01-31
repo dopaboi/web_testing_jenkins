@@ -17,7 +17,7 @@ public class BuildPage extends Page{
     @FindBy(css = "#description > div")
     private WebElement buildDescription;
 
-    @FindBy(linkText = "Редактировать информацию сборки")
+    @FindBy(xpath = "//*[@id=\"tasks\"]/div[5]/span/a")
     private WebElement linkEdit;
 
     @FindBy(name = "displayName")
@@ -67,6 +67,8 @@ public class BuildPage extends Page{
         buttonAccept.click();
         buttonSave.click();
     }
+
+
 
     public void DeleteBuild()
     {

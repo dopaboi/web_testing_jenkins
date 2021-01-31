@@ -22,14 +22,14 @@ public class BuildTest extends BasicTest {
         assertTrue(buildPage.isBuildCreated());
     }
 
-    @Test
+    @Test(dependsOnMethods = {"CreateBuild"})
     public void EditBuildTest() throws Exception {
         buildPage.open();
         buildPage.UpdateBuild();
         assertTrue(buildPage.isUpdateBuild());
     }
 
-    @Test
+    @Test(dependsOnMethods = {"EditBuildTest"})
     public void DeleteBuild() throws Exception
     {
         buildPage.open();

@@ -24,7 +24,7 @@ public class ViewTest extends BasicTest {
         viewJobPage = homePage.createNewView();
     }
 
-    @Test
+    @Test(dependsOnMethods = {"CreateNewView"})
     public void AddDeskTest() throws Exception
     {
         viewJobPage.open();
@@ -32,19 +32,20 @@ public class ViewTest extends BasicTest {
         assertTrue(viewJobPage.isAddedDesk());
     }
 
-    @Test
-    public void DeleteView() throws Exception
-    {
-        viewJobPage.open();
-        viewJobPage.DeleteView();
-        assertFalse(viewJobPage.isViewNotDeleted());
-    }
 
-    @Test
+    @Test(dependsOnMethods = {"AddDeskTest"})
     public void AddJobToView() throws Exception
     {
         viewJobPage.open();
         viewJobPage = homePage.createJobToView();
         assertEquals(jobPage.getJobName(), ConfigProperties.getProperties("job.finalname"));
+    }
+    @Test(dependsOnMethods = {"AddJobToView"})
+    public void DeleteView() throws Exception
+    {
+        viewJobPage.open();
+        viewJobPage.DeleteView();
+        assertFalse(viewJobPage.isViewNotDeleted());
+        attachScreenshot();
     }
 }
