@@ -1,3 +1,6 @@
+import io.qameta.allure.Allure;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
@@ -8,6 +11,8 @@ import pages.JobPage;
 import pages.ViewJobPage;
 import utils.ConfigProperties;
 
+
+import java.io.ByteArrayInputStream;
 
 import static org.testng.Assert.*;
 
@@ -30,6 +35,7 @@ public class ViewTest extends BasicTest {
         viewJobPage.open();
         viewJobPage.AddDesk();
         assertTrue(viewJobPage.isAddedDesk());
+        Allure.addAttachment("Failed to create view", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
     }
 
 
@@ -39,6 +45,7 @@ public class ViewTest extends BasicTest {
         viewJobPage.open();
         viewJobPage = homePage.createJobToView();
         assertEquals(jobPage.getJobName(), ConfigProperties.getProperties("job.finalname"));
+        Allure.addAttachment("Failed to add job to view", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
     }
     @Test(dependsOnMethods = {"AddJobToView"})
     public void DeleteView() throws Exception
@@ -46,6 +53,7 @@ public class ViewTest extends BasicTest {
         viewJobPage.open();
         viewJobPage.DeleteView();
         assertFalse(viewJobPage.isViewNotDeleted());
-        attachScreenshot();
+        Allure.addAttachment("Failed to delete view", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+
     }
 }
