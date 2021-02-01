@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 import pages.HomePage;
 import pages.JobPage;
-import pages.LoginPage;
 import utils.ConfigProperties;
 
 import java.io.ByteArrayInputStream;

@@ -27,13 +27,6 @@ public class BasicTest {
         return driver;
     }
 
-//    @Attachment(value = "Failed test screenshot")
-//    public byte[] attachScreenshot() {
-//        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-//    }
-
-
-
     @AfterTest
     public void tearDown() throws Exception {
         driver.quit();

@@ -38,11 +38,12 @@ public class BuildTest extends BasicTest {
         Allure.addAttachment("Failed to edit build", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
     }
 
-    @Test(dependsOnMethods = {"EditBuildTest"})
+    @Test(dependsOnMethods = "EditBuildTest")
     public void DeleteBuild() throws Exception
     {
         buildPage.open();
         buildPage.DeleteBuild();
+        assertTrue(buildPage.isBuildNotDeleted());
         Allure.addAttachment("Failed to delete build", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
     }
 

@@ -68,6 +68,7 @@ public class JobPage extends Page {
     {
         return isElementPresent(jobName);
     }
+
     public boolean isJobUpdate()
     {
         return isElementPresent(jobDescription);
