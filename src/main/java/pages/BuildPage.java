@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import utils.ConfigProperties;
 
 public class BuildPage extends Page{
@@ -17,7 +16,7 @@ public class BuildPage extends Page{
     @FindBy(css = "#description > div")
     private WebElement buildDescription;
 
-    @FindBy(xpath = "//*[@id=\"tasks\"]/div[5]/span/a")
+    @FindBy(linkText = "Редактировать информацию сборки")
     private WebElement linkEdit;
 
     @FindBy(name = "displayName")
@@ -26,17 +25,13 @@ public class BuildPage extends Page{
     @FindBy(name = "description")
     private WebElement description;
 
-
-    @FindBy(xpath = "//*[@id=\"main-panel\"]/h1/text()")
-    private WebElement nameBuild;
-
     @FindBy(id="hoverNotification")
     private WebElement creationNotification;
 
     @FindBy(id="yui-gen1-button")
     private WebElement buttonAccept;
 
-    @FindBy(xpath = "//*[@id=\"tasks\"]/div[6]/span/a")
+    @FindBy(linkText = "Delete build ‘first build’")
     private WebElement deleteBuild;
 
     @FindBy(id = "yui-gen3-button")

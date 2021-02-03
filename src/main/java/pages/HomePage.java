@@ -8,11 +8,8 @@ import utils.ConfigProperties;
 
 public class HomePage extends Page {
 
-    @FindBy(xpath = "//*[@id=\"tasks\"]/div[1]/span/a")
+    @FindBy(linkText = "Создать Item")
     private WebElement linkCreateJob;
-
-//    @FindBy(linkText = "Создать Item")
-//    private WebElement linkCreateJob;
 
     @FindBy(id = "name")
     private WebElement fieldName;

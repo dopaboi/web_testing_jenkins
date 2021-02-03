@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
 import entities.User;
@@ -28,17 +27,17 @@ public class LoginPage extends Page {
     @FindBy(name = "Submit")
     private WebElement buttonLogin;
 
-    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/a")
-    private WebElement LinkLogIn;
+    @FindBy(linkText = "выход")
+    private WebElement linkLogIn;
 
-    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/a[2]")
+    @FindBy(linkText = "войти")
     private WebElement linkLogOut;
 
     public boolean isLoggedIn() {
         return isElementPresent(linkLogOut);
 
     }public boolean isLoggedOut() {
-        return isElementPresent(LinkLogIn);
+        return isElementPresent(linkLogIn);
     }
 
     public void login(User admin) {
@@ -51,7 +50,7 @@ public class LoginPage extends Page {
     }
 
     public void logout() {
-        linkLogOut.click();
+        linkLogIn.click();
     }
 
 }

@@ -44,7 +44,7 @@ public class JobPage extends Page {
     @FindBy(linkText = "job for testing")
     private WebElement linkJob;
 
-    @FindBy(xpath = "//*[@id=\"tasks\"]/div[7]/span/a")
+    @FindBy(linkText = "Удалить Проект")
     private WebElement linkDelete;
 
     public JobPage(WebDriver driver) {
@@ -56,9 +56,6 @@ public class JobPage extends Page {
         return jobName.getText();
     }
 
-    public String getJobDescription() {
-        return jobDescription.getText();
-    }
 
     public boolean isJobNotDeleted() {
         return isElementPresent(jobName);
