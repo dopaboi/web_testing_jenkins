@@ -74,6 +74,6 @@ public class BuildPage extends Page{
 
     @Override
     public void open() {
-        driver.get(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.newname") + "/lastBuild");
+        driver.get(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name") + "/lastBuild");
     }
 }

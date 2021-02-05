@@ -2,18 +2,20 @@ import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITest;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
+import sun.awt.geom.AreaOp;
 
 
 public class TestAllureListener extends BasicTest implements ITestListener {
+
 
     @Override
     public void onTestFailure(ITestResult result) {
         saveScreenShotOnFailure(getWebDriver());
         saveLogs(result.getMethod().getConstructorOrMethod().getName());
-        getScreenshot();
+        getScreenshot(result.getName());
     }
 
     @Attachment(value = "Screenshot", type = "image.png")

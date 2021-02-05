@@ -21,4 +21,13 @@ public class LoginTest extends BasicTest {
         assertTrue(loginPage.isLoggedIn());
     }
 
+    @Test
+    public void loginTest_failed() throws Exception
+    {
+        loginPage.open();
+        loginPage.failed_login();
+        assertTrue(loginPage.isNotLoggedIn());
+    }
+
+
 }

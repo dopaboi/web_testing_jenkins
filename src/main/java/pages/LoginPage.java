@@ -28,16 +28,24 @@ public class LoginPage extends Page {
     private WebElement buttonLogin;
 
     @FindBy(linkText = "выход")
-    private WebElement linkLogIn;
-
-    @FindBy(linkText = "войти")
     private WebElement linkLogOut;
 
+    @FindBy(linkText = "войти")
+    private WebElement linkLogIn;
+
+    @FindBy(css = "body > div > div > form > div.alert.alert-danger")
+    private WebElement login;
+
+    public boolean isNotLoggedIn()
+    {
+        return isElementPresent(login);
+    }
+
     public boolean isLoggedIn() {
-        return isElementPresent(linkLogOut);
+        return isElementPresent(linkLogIn);
 
     }public boolean isLoggedOut() {
-        return isElementPresent(linkLogIn);
+        return isElementPresent(linkLogOut);
     }
 
     public void login(User admin) {
@@ -49,8 +57,17 @@ public class LoginPage extends Page {
         buttonLogin.click();
     }
 
+    public void failed_login()
+    {
+        fieldPassword.clear();
+        fieldPassword.clear();
+        type(fieldLogin, ConfigProperties.getProperties("wrong.username"));
+        type(fieldPassword, ConfigProperties.getProperties("wrong.password"));
+        buttonLogin.click();
+    }
+
     public void logout() {
-        linkLogIn.click();
+        linkLogOut.click();
     }
 
 }

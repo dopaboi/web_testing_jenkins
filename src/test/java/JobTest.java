@@ -1,4 +1,6 @@
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -17,56 +19,49 @@ public class JobTest extends BasicTest {
     private HomePage homePage = PageFactory.initElements(getWebDriver(), HomePage.class);
     private JobPage jobPage = PageFactory.initElements(getWebDriver(), JobPage.class);
 
-
-    @Test
-    public void JobCreationTest() throws Exception {
+    @BeforeMethod
+    public void loginIs()
+    {
         homePage.open();
         if(loginPage.isLoggedIn())
         {
             loginPage.open();
             loginPage.login(admin);
         }
+    }
+
+    @Test
+    public void JobCreationTest() throws Exception {
+        homePage.open();
         jobPage = homePage.createJob();
         assertEquals(jobPage.getJobName(), ConfigProperties.getProperties("job.finalname"));
-
+        jobPage.deleteJob();
     }
 
     @Test
     public void AddDescriptionJob() throws Exception {
-        jobPage.open();
-        if(loginPage.isLoggedIn())
-        {
-            loginPage.open();
-            loginPage.login(admin);
-            jobPage.open();
-        }
+        homePage.open();
+        jobPage = homePage.createJob();
         jobPage.updateJob();
         assertTrue(jobPage.isJobUpdate());
+        jobPage.deleteJob();
     }
 
     @Test
     public void RenameJobTest() throws Exception {
-        jobPage.open();
-        if(loginPage.isLoggedIn())
-        {
-            loginPage.open();
-            loginPage.login(admin);
-            jobPage.open();
-        }
+        homePage.open();
+        jobPage = homePage.createJob();
         jobPage.renameJob();
         assertTrue(jobPage.isJobRename());
+        jobPage.deleteJob();
 
     }
 
     @Test
     public void DeleteJobTest() throws Exception {
+        homePage.open();
+        jobPage = homePage.createJob();
         jobPage.open();
-        if(loginPage.isLoggedIn())
-        {
-            loginPage.open();
-            loginPage.login(admin);
-            jobPage.open();
-        }
         jobPage.deleteJob();
         assertFalse(jobPage.isJobNotDeleted());
     }

@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,7 +15,7 @@ public class HomePage extends Page {
     @FindBy(id = "name")
     private WebElement fieldName;
 
-    @FindBy(xpath = "//*[@id=\"j-add-item-type-standalone-projects\"]/ul/li[1]")
+    @FindBy(className = "hudson_model_FreeStyleProject")
     private WebElement freeConfig;
 
     @FindBy(id = "ok-button")

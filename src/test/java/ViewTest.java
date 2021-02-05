@@ -1,4 +1,6 @@
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -18,8 +20,8 @@ public class ViewTest extends BasicTest {
     private JobPage jobPage = PageFactory.initElements(getWebDriver(), JobPage.class);
     private LoginPage loginPage = PageFactory.initElements(getWebDriver(), LoginPage.class);
 
-    @Test
-    public void CreateNewView() throws Exception
+    @BeforeMethod
+    public void loginIs()
     {
         homePage.open();
         if(loginPage.isLoggedIn())
@@ -27,6 +29,12 @@ public class ViewTest extends BasicTest {
             loginPage.open();
             loginPage.login(admin);
         }
+    }
+
+    @Test
+    public void CreateNewView() throws Exception
+    {
+        homePage.open();
         viewJobPage = homePage.createNewView();
     }
 
@@ -34,12 +42,6 @@ public class ViewTest extends BasicTest {
     public void AddDeskTest() throws Exception
     {
         viewJobPage.open();
-        if(loginPage.isLoggedIn())
-        {
-            loginPage.open();
-            loginPage.login(admin);
-            viewJobPage.open();
-        }
         viewJobPage.AddDesk();
         assertTrue(viewJobPage.isAddedDesk());
 
@@ -50,12 +52,6 @@ public class ViewTest extends BasicTest {
     public void AddJobToView() throws Exception
     {
         viewJobPage.open();
-        if(loginPage.isLoggedIn())
-        {
-            loginPage.open();
-            loginPage.login(admin);
-            viewJobPage.open();
-        }
         viewJobPage = homePage.createJobToView();
         assertEquals(jobPage.getJobName(), ConfigProperties.getProperties("job.finalname"));
     }
@@ -63,14 +59,9 @@ public class ViewTest extends BasicTest {
     public void DeleteView() throws Exception
     {
         viewJobPage.open();
-        if(loginPage.isLoggedIn())
-        {
-            loginPage.open();
-            loginPage.login(admin);
-            viewJobPage.open();
-        }
         viewJobPage.DeleteView();
         assertFalse(viewJobPage.isViewNotDeleted());
 
     }
+
 }
