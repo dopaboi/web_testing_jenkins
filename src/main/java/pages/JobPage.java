@@ -58,7 +58,7 @@ public class JobPage extends Page {
 
     public boolean JobIsCreate() {return  isElementPresent(linkJob);}
 
-    public boolean isJobNotDeleted() {
+    public boolean isJobDeleted() {
         return isElementPresent(jobName);
     }
 

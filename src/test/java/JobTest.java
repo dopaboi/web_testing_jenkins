@@ -1,5 +1,4 @@
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -30,16 +29,16 @@ public class JobTest extends BasicTest {
         }
     }
 
-    @Test
-    public void JobCreationTest() throws Exception {
+    @Test(priority = 1)
+    public void JobCreationTest() {
         homePage.open();
         jobPage = homePage.createJob();
         assertEquals(jobPage.getJobName(), ConfigProperties.getProperties("job.finalname"));
         jobPage.deleteJob();
     }
 
-    @Test
-    public void AddDescriptionJob() throws Exception {
+    @Test(priority = 2)
+    public void AddDescriptionJob()  {
         homePage.open();
         jobPage = homePage.createJob();
         jobPage.updateJob();
@@ -47,23 +46,21 @@ public class JobTest extends BasicTest {
         jobPage.deleteJob();
     }
 
-    @Test
-    public void RenameJobTest() throws Exception {
+    @Test(priority = 3)
+    public void RenameJobTest()  {
         homePage.open();
         jobPage = homePage.createJob();
         jobPage.renameJob();
         assertTrue(jobPage.isJobRename());
         jobPage.deleteJob();
-
     }
 
-    @Test
-    public void DeleteJobTest() throws Exception {
+    @Test(priority = 4)
+    public void DeleteJobTest()  {
         homePage.open();
         jobPage = homePage.createJob();
         jobPage.open();
         jobPage.deleteJob();
-        assertFalse(jobPage.isJobNotDeleted());
+        assertFalse(jobPage.isJobDeleted());
     }
-
 }

@@ -1,5 +1,4 @@
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -31,15 +30,15 @@ public class ViewTest extends BasicTest {
         }
     }
 
-    @Test
-    public void CreateNewView() throws Exception
+    @Test(priority = 1)
+    public void CreateNewView()
     {
         homePage.open();
         viewJobPage = homePage.createNewView();
     }
 
-    @Test
-    public void AddDeskTest() throws Exception
+    @Test(priority = 2)
+    public void AddDeskTest()
     {
         viewJobPage.open();
         viewJobPage.AddDesk();
@@ -47,21 +46,20 @@ public class ViewTest extends BasicTest {
 
     }
 
-
-    @Test
+    @Test(priority = 3)
     public void AddJobToView() throws Exception
     {
         viewJobPage.open();
         viewJobPage = homePage.createJobToView();
-        assertEquals(jobPage.getJobName(), ConfigProperties.getProperties("job.finalname"));
+        assertEquals(jobPage.getJobName(), ConfigProperties.getProperties("view.name.job"));
     }
-    @Test
-    public void DeleteView() throws Exception
+
+    @Test(priority = 4)
+    public void DeleteView()
     {
         viewJobPage.open();
         viewJobPage.DeleteView();
-        assertFalse(viewJobPage.isViewNotDeleted());
-
+        assertFalse(viewJobPage.isViewDeleted());
     }
 
 }

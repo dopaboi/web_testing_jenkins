@@ -13,7 +13,7 @@ public class LoginTest extends BasicTest {
     private LoginPage loginPage = PageFactory.initElements(getWebDriver(), LoginPage.class);
 
     @Test
-    public void loginTest() throws Exception{
+    public void loginTest() {
         loginPage.open();
         loginPage.login(admin);
         assertTrue(loginPage.isLoggedOut());
@@ -22,7 +22,7 @@ public class LoginTest extends BasicTest {
     }
 
     @Test
-    public void loginTest_failed() throws Exception
+    public void loginTestFailed()
     {
         loginPage.open();
         loginPage.failed_login();

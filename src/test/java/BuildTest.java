@@ -30,10 +30,7 @@ public class BuildTest extends BasicTest {
             loginPage.open();
             loginPage.login(admin);
         }
-        if(jobPage.JobIsCreate()) {
-            jobPage.open();
-            jobPage.deleteJob();
-        }
+        if(jobPage.JobIsCreate()) { }
         else
         {
             homePage.open();
@@ -42,33 +39,34 @@ public class BuildTest extends BasicTest {
     }
 
     @Test
-    public void CreateBuild() throws Exception
+    public void CreateBuild()
     {
         jobPage.open(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name"));
         buildPage = jobPage.createBuild();
         assertTrue(buildPage.isBuildCreated());
+        buildPage.open();
         buildPage.DeleteBuild();
-
     }
 
     @Test
-    public void EditBuildTest() throws Exception {
-        jobPage.open(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name"));
+    public void EditBuildTest() {
+       jobPage.open(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name"));
         buildPage = jobPage.createBuild();
         buildPage.open();
         buildPage.UpdateBuild();
         assertTrue(buildPage.isUpdateBuild());
+        buildPage.open();
         buildPage.DeleteBuild();
     }
 
     @Test
-    public void DeleteBuild() throws Exception
+    public void DeleteBuild()
     {
-        jobPage.open(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name"));
+       jobPage.open(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name"));
         buildPage = jobPage.createBuild();
         buildPage.open();
         buildPage.DeleteBuild();
-        assertTrue(buildPage.isBuildNotDeleted());
+        assertFalse(buildPage.isBuildDeleted());
     }
 
 }

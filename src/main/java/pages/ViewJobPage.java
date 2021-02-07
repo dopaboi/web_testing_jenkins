@@ -15,11 +15,10 @@ public class ViewJobPage extends Page {
     @FindBy(linkText = "view number three")
     private WebElement viewName;
 
-
     @FindBy(name = "description")
     private WebElement description;
 
-    @FindBy(id = "yui-gen37-button")
+    @FindBy(id = "yui-gen29-button")
     private WebElement buttonSaveDesk;
 
     @FindBy(css = "#description > div")
@@ -36,7 +35,7 @@ public class ViewJobPage extends Page {
         super(driver);
     }
 
-    public boolean isViewNotDeleted() {
+    public boolean isViewDeleted() {
         return isElementPresent(viewName);
     }
 

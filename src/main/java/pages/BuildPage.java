@@ -31,7 +31,7 @@ public class BuildPage extends Page{
     @FindBy(id="yui-gen1-button")
     private WebElement buttonAccept;
 
-    @FindBy(linkText = "Delete build ‘first build’")
+    @FindBy(xpath = "//*[@id=\"tasks\"]/div[6]/span/a")
     private WebElement deleteBuild;
 
     @FindBy(id = "yui-gen3-button")
@@ -52,7 +52,7 @@ public class BuildPage extends Page{
         return isElementPresent(creationNotification);
     }
 
-    public boolean isBuildNotDeleted() {return isElementPresent(lastBuild);}
+    public boolean isBuildDeleted() {return isElementPresent(lastBuild);}
 
     public void UpdateBuild()
     {
