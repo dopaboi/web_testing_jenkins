@@ -36,15 +36,16 @@ public class LoginPage extends Page {
     @FindBy(css = "body > div > div > form > div.alert.alert-danger")
     private WebElement login;
 
-    public boolean isNotLoggedIn()
-    {
+    public boolean isNotLoggedIn() {
         return isElementPresent(login);
     }
 
     public boolean isLoggedIn() {
         return isElementPresent(linkLogIn);
 
-    }public boolean isLoggedOut() {
+    }
+
+    public boolean isLoggedOut() {
         return isElementPresent(linkLogOut);
     }
 
@@ -57,8 +58,7 @@ public class LoginPage extends Page {
         buttonLogin.click();
     }
 
-    public void failed_login()
-    {
+    public void failed_login() {
         fieldPassword.clear();
         fieldPassword.clear();
         type(fieldLogin, ConfigProperties.getProperties("wrong.username"));

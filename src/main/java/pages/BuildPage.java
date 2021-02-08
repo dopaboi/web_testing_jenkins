@@ -40,8 +40,6 @@ public class BuildPage extends Page{
     @FindBy(id="yui-gen4-button")
     private WebElement buttonSave;
 
-    @FindBy(xpath = "//*[@id=\"buildHistory\"]/div[2]/table/tbody/tr[2]/td")
-    private WebElement lastBuild;
 
 
     public boolean isUpdateBuild(){
@@ -52,7 +50,6 @@ public class BuildPage extends Page{
         return isElementPresent(creationNotification);
     }
 
-    public boolean isBuildDeleted() {return isElementPresent(lastBuild);}
 
     public void UpdateBuild()
     {

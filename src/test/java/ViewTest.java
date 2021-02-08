@@ -8,6 +8,7 @@ import pages.JobPage;
 import pages.LoginPage;
 import pages.ViewJobPage;
 import utils.ConfigProperties;
+
 import static org.testng.Assert.*;
 
 @Listeners({TestAllureListener.class})
@@ -20,43 +21,64 @@ public class ViewTest extends BasicTest {
     private LoginPage loginPage = PageFactory.initElements(getWebDriver(), LoginPage.class);
 
     @BeforeMethod
-    public void loginIs()
-    {
+    public void loginIs() {
         homePage.open();
-        if(loginPage.isLoggedIn())
-        {
+        if (loginPage.isLoggedIn()) {
             loginPage.open();
             loginPage.login(admin);
         }
+
     }
 
     @Test(priority = 1)
-    public void CreateNewView()
-    {
+    public void CreateNewView() {
         homePage.open();
         viewJobPage = homePage.createNewView();
+        homePage.open();
+        assertTrue(viewJobPage.isViewDeleted());
+        viewJobPage.open();
+        viewJobPage.DeleteView();
     }
 
     @Test(priority = 2)
-    public void AddDeskTest()
-    {
+    public void RenameViewNegativeTest() {
+        homePage.open();
+        viewJobPage = homePage.createNewView();
+        homePage.open();
+        viewJobPage = homePage.createNewViewFailed();
+        viewJobPage.RenameViewFailed();
+        assertTrue(viewJobPage.isRenameFailed());
+        viewJobPage.open();
+        viewJobPage.DeleteView();
+        viewJobPage.openSecondView();
+        viewJobPage.DeleteSecondView();
+    }
+
+    @Test(priority = 2)
+    public void AddDeskTest() {
+        homePage.open();
+        viewJobPage = homePage.createNewView();
         viewJobPage.open();
         viewJobPage.AddDesk();
         assertTrue(viewJobPage.isAddedDesk());
-
+        viewJobPage.DeleteView();
     }
 
     @Test(priority = 3)
-    public void AddJobToView() throws Exception
-    {
+    public void AddJobToView() {
+        homePage.open();
+        viewJobPage = homePage.createNewView();
         viewJobPage.open();
         viewJobPage = homePage.createJobToView();
-        assertEquals(jobPage.getJobName(), ConfigProperties.getProperties("view.name.job"));
+        assertEquals(jobPage.getJobName(), ConfigProperties.getProperties("view.job.finalname"));
+        viewJobPage.open();
+        viewJobPage.DeleteView();
     }
 
     @Test(priority = 4)
-    public void DeleteView()
-    {
+    public void DeleteView() {
+        homePage.open();
+        viewJobPage = homePage.createNewView();
         viewJobPage.open();
         viewJobPage.DeleteView();
         assertFalse(viewJobPage.isViewDeleted());

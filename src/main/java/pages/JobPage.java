@@ -10,11 +10,17 @@ import utils.ConfigProperties;
 
 public class JobPage extends Page {
 
-    @FindBy(linkText="Создать Item")
+    @FindBy(linkText = "Создать Item")
     private WebElement create;
 
-    @FindBy(css ="h1.job-index-headline.page-headline")
+    @FindBy(css = "h1.job-index-headline.page-headline")
     private WebElement jobName;
+
+    @FindBy(id = "name")
+    private WebElement fieldName;
+
+    @FindBy(className = "hudson_model_FreeStyleProject")
+    private WebElement freeConfig;
 
     @FindBy(css = "#description > div")
     private WebElement jobDescription;
@@ -25,7 +31,7 @@ public class JobPage extends Page {
     @FindBy(name = "description")
     private WebElement inputDesc;
 
-    @FindBy(id="yui-gen27-button")
+    @FindBy(id = "yui-gen27-button")
     private WebElement buttonSave;
 
     @FindBy(linkText = "Rename")
@@ -34,7 +40,7 @@ public class JobPage extends Page {
     @FindBy(name = "newName")
     private WebElement newName;
 
-    @FindBy(id="yui-gen3-button")
+    @FindBy(id = "yui-gen3-button")
     private WebElement buttonRename;
 
     @FindBy(linkText = "Собрать сейчас")
@@ -47,6 +53,9 @@ public class JobPage extends Page {
     @FindBy(linkText = "Удалить Проект")
     private WebElement linkDelete;
 
+    @FindBy(id = "itemname-invalid")
+    private WebElement invalidName;
+
     public JobPage(WebDriver driver) {
         super(driver);
     }
@@ -56,25 +65,28 @@ public class JobPage extends Page {
         return jobName.getText();
     }
 
-    public boolean JobIsCreate() {return  isElementPresent(linkJob);}
+    public boolean JobIsCreate() {
+        return isElementPresent(linkJob);
+    }
 
     public boolean isJobDeleted() {
         return isElementPresent(jobName);
     }
 
-    public boolean isJobRename()
-    {
+    public boolean ErrorCreation() {
+        return isElementPresent(invalidName);
+    }
+
+    public boolean isJobRename() {
         return isElementPresent(jobName);
     }
 
-    public boolean isJobUpdate()
-    {
+    public boolean isJobUpdate() {
         return isElementPresent(jobDescription);
     }
 
 
-    public void renameJob()
-    {
+    public void renameJob() {
         linkRename.click();
         newName.clear();
         newName.click();
@@ -82,22 +94,26 @@ public class JobPage extends Page {
         buttonRename.click();
     }
 
-    public BuildPage createBuild()
-    {
-     linkCreateBuild.click();
-     return PageFactory.initElements(driver, BuildPage.class);
+    public void failedCreationJob() {
+        create.click();
+        type(fieldName, ConfigProperties.getProperties("job.name"));
+        freeConfig.click();
+
     }
 
-    public void updateJob()
-    {
+    public BuildPage createBuild() {
+        linkCreateBuild.click();
+        return PageFactory.initElements(driver, BuildPage.class);
+    }
+
+    public void updateJob() {
         linkSettings.click();
         type(inputDesc, ConfigProperties.getProperties("job.description"));
         buttonSave.click();
 
     }
 
-    public void deleteJob()
-    {
+    public void deleteJob() {
         linkDelete.click();
         Alert alert = driver.switchTo().alert();
         alert.accept();

@@ -50,7 +50,8 @@ public class HomePage extends Page {
         return PageFactory.initElements(driver, JobPage.class);
     }
 
-    public ViewJobPage createJobToView() throws InterruptedException {
+
+    public ViewJobPage createJobToView() {
         linkCreateJob.click();
         type(fieldName, ConfigProperties.getProperties("view.name.job"));
         freeConfig.click();
@@ -62,6 +63,14 @@ public class HomePage extends Page {
     public ViewJobPage createNewView() {
         linkCreateView.click();
         type(nameView, ConfigProperties.getProperties("view.name"));
+        dashboardView.click();
+        buttonSubmit.click();
+        return PageFactory.initElements(driver, ViewJobPage.class);
+    }
+
+    public ViewJobPage createNewViewFailed() {
+        linkCreateView.click();
+        type(nameView, ConfigProperties.getProperties("wrong.name"));
         dashboardView.click();
         buttonSubmit.click();
         return PageFactory.initElements(driver, ViewJobPage.class);

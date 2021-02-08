@@ -17,7 +17,6 @@ import entities.User;
 import utils.ConfigProperties;
 
 
-
 public class BasicTest {
 
     protected static WebDriver driver;
@@ -28,10 +27,10 @@ public class BasicTest {
     protected WebDriver getWebDriver() {
 
         if (driver == null) {
-            //System.setProperty(ConfigProperties.getProperties("name.driver"), ConfigProperties.getProperties("path.driver"));
+            System.setProperty(ConfigProperties.getProperties("name.driver"), ConfigProperties.getProperties("path.driver"));
             driver = new ChromeDriver();
             driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Long.parseLong(ConfigProperties.getProperties(    "imp.wait")), TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(Long.parseLong(ConfigProperties.getProperties("imp.wait")), TimeUnit.SECONDS);
         }
         return driver;
     }
@@ -51,7 +50,7 @@ public class BasicTest {
 
 
     @AfterTest
-    public void tearDown() throws Exception {
+    public void tearDown()  {
         driver.quit();
     }
 }

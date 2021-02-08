@@ -22,7 +22,7 @@ public class LoginTest extends BasicTest {
     }
 
     @Test
-    public void loginTestFailed()
+    public void loginNegativeTest()
     {
         loginPage.open();
         loginPage.failed_login();

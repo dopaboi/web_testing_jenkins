@@ -1,4 +1,5 @@
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -22,35 +23,30 @@ public class BuildTest extends BasicTest {
 
 
     @BeforeMethod
-    public void loginIs()
-    {
+    public void loginIs() {
         homePage.open();
-        if(loginPage.isLoggedIn())
-        {
+        if (loginPage.isLoggedIn()) {
             loginPage.open();
             loginPage.login(admin);
         }
-        if(jobPage.JobIsCreate()) { }
-        else
-        {
+        if (jobPage.JobIsCreate()) {
+        } else {
             homePage.open();
             homePage.createJob();
         }
     }
 
     @Test
-    public void CreateBuild()
-    {
+    public void CreateBuild() {
         jobPage.open(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name"));
         buildPage = jobPage.createBuild();
         assertTrue(buildPage.isBuildCreated());
-        buildPage.open();
-        buildPage.DeleteBuild();
+
     }
 
     @Test
     public void EditBuildTest() {
-       jobPage.open(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name"));
+        jobPage.open(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name"));
         buildPage = jobPage.createBuild();
         buildPage.open();
         buildPage.UpdateBuild();
@@ -60,13 +56,17 @@ public class BuildTest extends BasicTest {
     }
 
     @Test
-    public void DeleteBuild()
-    {
-       jobPage.open(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name"));
+    public void DeleteBuild() {
+        jobPage.open(ConfigProperties.getProperties("job.url") + ConfigProperties.getProperties("job.name"));
         buildPage = jobPage.createBuild();
         buildPage.open();
         buildPage.DeleteBuild();
-        assertFalse(buildPage.isBuildDeleted());
+    }
+
+    @AfterMethod
+    public void Clean() {
+        jobPage.open();
+        jobPage.deleteJob();
     }
 
 }

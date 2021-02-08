@@ -38,6 +38,18 @@ public class JobTest extends BasicTest {
     }
 
     @Test(priority = 2)
+    public void JobCreationNegativeTest()
+    {
+        homePage.open();
+        jobPage = homePage.createJob();
+        homePage.open();
+        jobPage.failedCreationJob();
+        assertTrue(jobPage.ErrorCreation());
+        jobPage.open();
+        jobPage.deleteJob();
+    }
+
+    @Test(priority = 2)
     public void AddDescriptionJob()  {
         homePage.open();
         jobPage = homePage.createJob();
