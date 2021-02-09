@@ -1,1 +1,1 @@
-# Task for JazzTeam #
+# Web jenkins testing with selenium, page object, allure #
